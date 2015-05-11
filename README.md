@@ -3,6 +3,10 @@ maxminion
 
 A test minion that compiles the given apps using MaxCompiler 2015.1 release and produces a report.
 
+    $ python minion.py <username> <password>
+
+Where username and password are for the source control e.g. GitHub.
+
 This is the first draft, alpha version that is broken by design. Here are some of the problems:
 
 * Takes the username and password for the source control in plain text on the CLI.
