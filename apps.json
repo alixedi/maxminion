@@ -1,0 +1,8 @@
+{
+  "APPS": {
+    "Classification": {
+      "Fetch": "git clone https://$username:$password@github.com/MaxelerTechnologies/Classification.git",
+      "Test": "cd Classification/APP/classification/RunRules/Simulation && make build"
+    }
+  }
+}
