@@ -1,7 +1,7 @@
 maxminion
 =========
 
-A test minion that compiles the given apps against MaxCompiler 2014.2 as well as 2015.1 release and produces a report.
+A test minion that compiles the given apps using MaxCompiler 2015.1 release and produces a report.
 
 This is the first draft, alpha version that is broken by design. Here are some of the problems:
 
