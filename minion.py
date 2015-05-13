@@ -1,43 +1,65 @@
-import sys
-import json
-import string
-import subprocess
-import utils
-import os
+# -*- coding: utf-8 -*-
+"""
+    maxminion.minion
+    ~~~~~~~~~~~~~~~~
 
-# Parse the CLI
-if len(sys.argv) < 3:
-    print 'Usage: minion.py <username> <password>'
-    sys.exit(1)
+    A stupid, yellow assistant for testing MaxCompiler.
 
-args = {
-    'username': sys.argv[1],
-    'password': sys.argv[2]
-}
+    It doesn't talk nonsense though.
 
-# Read the config
-cfgf = open('./apps.json')
-cfg = json.loads(cfgf.read())
+    :copyright: (c) 2015 Maxeler Technologies
+    :license: No license at the moment.
+"""
 
-# make tmp directory
-utils.mkdir('./tmp')
+_doc_ = """
+Maxeler Test Minion.
 
-# Set up the output streams
-FNULL = open(os.devnull, 'w')
+Usage:
+  maxminion <instructions_file>
+  maxminion -h | --help
+  maxminion --version
 
-with utils.cd('./tmp'):
-    for app in cfg['APPS']:
+Options:
+  -h --help    Show this screen.
+  --version    Show version.
+"""
+
+from os import path
+from docopt import docopt
+from utils import mkcd, load_inst, get_login
+from utils import fetch_code, build_code, uprint
+from utils import CodeFetchError, CodeBuildError
+
+
+VERSION = '0.0.1'
+FILE = path.realpath(__file__)
+DIR = path.dirname(FILE)
+SCRATCH = path.join(DIR, '.scratch')
+
+
+def run_app_test(app_name, app, login):
+    """Runs tests for given app."""
+    uprint('Testing %s... ' % app_name)
+    with mkcd(app_name):
         try:
-            utils.uprint('Testing %s: ' % app)
-            tpl = string.Template(cfg['APPS'][app]['Fetch'])
-            fetch = tpl.safe_substitute(args)
-            test = cfg['APPS'][app]['Test']
-            subprocess.check_call(fetch, shell=True, stdout=FNULL, stderr=FNULL)
-            subprocess.check_call(test, shell=True, stdout=FNULL)
-            utils.uprint('OK')
-        except:
-            utils.uprint('ERROR')
-            continue
+            fetch_code(app['FETCH'], login)
+            build_code(app['BUILD'])
+            print('OK')
+        except CodeFetchError as e:
+            print(e)
+        except CodeBuildError as e:
+            print(e)
 
-# delete the tmp dir
-utils.rmdir('./tmp')
+def run_tests(apps, login):
+    """Kinda main. Runs the whole thing."""
+    with mkcd(SCRATCH):
+        # TODO: multiprocessing?
+        for app_name in apps:
+            app = apps[app_name]
+            run_app_test(app_name, app, login)
+
+if __name__ == '__main__':
+    args = docopt(_doc_, version=VERSION)
+    ins = load_inst(args['<instructions_file>'])
+    run_tests(ins['APPS'], get_login())
+
