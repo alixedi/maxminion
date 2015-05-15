@@ -15,7 +15,7 @@ _doc_ = """
 Maxeler Test Minion.
 
 Usage:
-  maxminion <instructions_file>
+  maxminion <instructions_file> <scratch_directory>
   maxminion -h | --help
   maxminion --version
 
@@ -33,9 +33,6 @@ from utils import CodeFetchError, CodeBuildError
 
 
 VERSION = '0.0.1'
-FILE = os.path.realpath(__file__)
-DIR = os.path.dirname(FILE)
-SCRATCH = os.path.join(DIR, '.scratch')
 
 
 def run_app_test(app_name, app, login):
@@ -51,18 +48,21 @@ def run_app_test(app_name, app, login):
         except CodeBuildError as e:
             print(e)
 
-def run_tests(apps, login):
+
+def run_tests(apps, scratch, login):
     """Kinda main. Runs the whole thing."""
-    with mkcd(SCRATCH):
+    with mkcd(scratch):
         # TODO: multiprocessing?
         for app_name in apps:
             app = apps[app_name]
             run_app_test(app_name, app, login)
+
 
 if __name__ == '__main__':
     args = docopt(_doc_, version=VERSION)
     print('$MAXCOMPILERDIR=' + os.environ['MAXCOMPILERDIR'])
     print('$MAXELEROSDIR=' + os.environ['MAXELEROSDIR'])
     ins = load_inst(args['<instructions_file>'])
-    run_tests(ins['APPS'], get_login())
+    scratch = os.path.abspath(args['<scratch_directory>'])
+    run_tests(ins['APPS'], scratch, get_login())
 

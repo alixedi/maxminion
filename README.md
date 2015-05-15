@@ -1,16 +1,16 @@
 maxminion
 =========
 
-A stupid, yellow assistant for testing MaxCompiler.
-
-It doesn't talk nonsense though - for now.
+A stupid, yellow (?!) assistant for downloading apps from the given URI and building them.
 
 Usage
 -----
 
-    $ git clone https://github.com/alixedi/maxminion
-
     $ pip install docopt
    
-    $ python minion.py
+    $ git clone https://github.com/maxeler/maxminion
+
+    $ cd maxminion
+
+    $ python maxminion/minion.py example_instructions.json ./tmp
 

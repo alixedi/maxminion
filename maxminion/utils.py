@@ -8,8 +8,9 @@ import subprocess
 
 
 class mkcd:
-    """Context manager for creating a new directory and
-    cd to it."""
+    """Context manager. Creates a new directory and
+    cd to it on entry. Cds back to original directory
+    and deletes the new directory on exit."""
 
     def __init__(self, dir):
         self.dir = os.path.expanduser(dir)
@@ -22,7 +23,8 @@ class mkcd:
 
     def __exit__(self, etype, value, traceback):
         os.chdir(self.pwd)
-        shutil.rmtree(self.dir)
+        # Perfect crime - No.
+        #shutil.rmtree(self.dir)
 
 
 class CodeFetchError(Exception):
@@ -33,7 +35,7 @@ class CodeBuildError(Exception):
     pass
 
 
-def load_inst(inst_file='./inst.json'):
+def load_inst(inst_file):
     """Loads given instructions file."""
     with open(inst_file, 'r') as f:
         return json.loads(f.read())
@@ -58,6 +60,7 @@ def process(cmd, out):
                              stdout=outf,
                              stderr=outf)
 
+
 def fetch_code(cmd, login):
     """Fetches the code using given cmd."""
     out = 'fetch.log'
@@ -66,7 +69,7 @@ def fetch_code(cmd, login):
     try:
         process(cmd, out)
     except subprocess.CalledProcessError as e:
-        raise CodeFetchException('ERROR! Fetch Failed [See %s].' % out)
+        raise CodeFetchError('ERROR! Fetch Failed [See %s].' % out)
 
 
 def build_code(cmd):
@@ -75,7 +78,8 @@ def build_code(cmd):
     try:
         process(cmd, out)
     except subprocess.CalledProcessError as e:
-        raise CodeFetchException('ERROR! Build failed [See %s].' % out)
+        raise CodeFetchError('ERROR! Build failed [See %s].' % out)
+
 
 def uprint(s):
     """Print sans newline."""
