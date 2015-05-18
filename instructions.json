@@ -1,7 +1,7 @@
 {
   "APPS": {
     "Classification": {
-      "FETCH": "git clone https://$username:$password@github.com/MaxelerTechnologies/Classification.git",
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/Classification.git",
       "BUILD": "cd Classification/APP/classification/RunRules/Simulation && make build"
     },
     "Correlation":
