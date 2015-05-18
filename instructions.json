@@ -1,0 +1,54 @@
+{
+  "APPS": {
+    "Classification": {
+      "FETCH": "git clone https://$username:$password@github.com/MaxelerTechnologies/Classification.git",
+      "BUILD": "cd Classification/APP/classification/RunRules/Simulation && make build"
+    },
+    "Correlation":
+    {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/Correlation.git",
+      "BUILD": "cd Correlation/APP/CPU_SRC/FullCorrelations && python make"
+    },
+    "LinearRegression":
+    {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/Linear-Regression",
+      "BUILD": "cd Linear-Regression/APP/CPU_SRC/Simple_Linear_Regression && python make"
+    },
+    "NBody": {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/NBody.git",
+      "BUILD": "cd NBody/APP/RunRules/Simulation && make build"
+    },
+    "Brain Network": {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/Brain-Network.git",
+      "BUILD": "cd Brain-Network/APP/RunRules/Simulation && make build"
+    },
+    "Breast Mammogram ROI Extractor": {
+      "FETCH": "git clone https://$username:$password@github.com/imilankovic/Breast-Mammogram-ROI-Extraction.git",
+      "BUILD": "cd Breast-Mammogram-ROI-Extraction/APP/RunRules/Simulation && make build"
+    },
+    "Fractal": {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/Fractal.git",
+      "BUILD": "cd Fractal/APP/RunRules/Simulation && make build"
+    },
+    "Smith Waterman": {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/Smith-Waterman.git",
+      "BUILD": "cd Smith-Waterman/APP/RunRules/Simulation && make build"
+    },
+    "Jacobi Solver": {
+      "FETCH":   "git clone https://$username:$password@github.com/maxeler/Jacobi-Solver.git Jacobi && git clone https://$username:$password@github.com/maxeler/maxpower.git maxpower",
+      "BUILD":   "cd maxpower && ant compile && export CLASSPATH=$PWD/bin:$CLASSPATH && cd ../Jacobi/APP/RunRules/Simulation && make build"
+    },
+    "Dense Matrix Multiplication": {
+      "FETCH": "git clone -b maxj_project https://$username:$password@github.com/maxeler/Dense-Matrix-Multiplication.git Dense-Matrix-Multiplication && git clone https://$username:$password@github.com/maxeler/maxpower.git maxpower",
+      "BUILD": "cd maxpower && ant compile && export CLASSPATH=$PWD/bin:$CLASSPATH && cd ../Dense-Matrix-Multiplication/APP/RunRules/Simulation && make build"
+    },
+    "Heston Option Pricer": {
+      "FETCH": "cp -r /network-raid/gitroot/HestonOptionPricer/ .",
+      "BUILD": "cd HestonOptionPricer/APP/RunRules/Simulation && make build"
+    },
+    "Non-Central Chi Square": {
+      "FETCH": "cp -r /network-raid/gitroot/Non-CentralChiSquare/ .",
+      "BUILD": "cd Non-CentralChiSquare/APP/RunRules/Simulation && make build"
+    }
+  }
+}
