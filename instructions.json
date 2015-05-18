@@ -49,6 +49,14 @@
     "Non-Central Chi Square": {
       "FETCH": "cp -r /network-raid/gitroot/Non-CentralChiSquare/ .",
       "BUILD": "cd Non-CentralChiSquare/APP/RunRules/Simulation && make build"
+    },
+    "FFT-1D": {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/FFT-1D.git",
+      "BUILD": "cd FFT-1D/APP/RunRules/Simulation && make build"
+    },
+    "FFT-2D": {
+      "FETCH": "git clone https://$username:$password@github.com/maxeler/FFT-2D.git",
+      "BUILD": "cd FFT-2D/APP/RunRules/Simulation && make build"
     }
   }
 }
