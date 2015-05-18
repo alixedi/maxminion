@@ -6,13 +6,13 @@
     },
     "Correlation":
     {
-      "FETCH": "git clone https://$username:$password@github.com/maxeler/Correlation.git",
-      "BUILD": "cd Correlation/APP/CPU_SRC/FullCorrelations && python make"
+      "FETCH": "svn co file:///network-raid/svnroot/riskengine/finance/current/dfe/projects/risk/correlation",
+      "BUILD": "cd correlation/RunRules/Simulation && make build"
     },
     "LinearRegression":
     {
       "FETCH": "git clone https://$username:$password@github.com/maxeler/Linear-Regression",
-      "BUILD": "cd Linear-Regression/APP/CPU_SRC/Simple_Linear_Regression && python make"
+      "BUILD": "cd Linear-Regression/APP/DFE_SRC/LinearRegression && ./make"
     },
     "NBody": {
       "FETCH": "git clone https://$username:$password@github.com/maxeler/NBody.git",
