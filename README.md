@@ -12,5 +12,5 @@ Usage
 
     $ cd maxminion
 
-    $ python maxminion/minion.py example_instructions.json ./tmp
+    $ python maxminion/minion.py instructions.json ./tmp
 
