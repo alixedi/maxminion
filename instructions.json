@@ -57,6 +57,14 @@
     "FFT-2D": {
       "FETCH": "git clone https://$username:$password@github.com/maxeler/FFT-2D.git",
       "BUILD": "cd FFT-2D/APP/RunRules/Simulation && make build"
+    },
+    "MotionEstimation": {
+      "FETCH": "cp -r /network-raid/gitroot/MotionEstimation/ .",
+      "BUILD": "cd MotionEstimation/APP/RunRules/Simulation && make build"
+    },
+    "Regex": {
+      "FETCH": "cp -r /network-raid/gitroot/Regex/ .",
+      "BUILD": "cd Regex/APP/RunRules/Simulation && make build"
     }
   }
 }
